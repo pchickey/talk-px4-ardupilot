@@ -4,7 +4,9 @@
 Pat Hickey
 13 Jan 2013
 
-A talk prepared for the PDX Drones group.
+A talk prepared for the PDX Drones group, 17 Jan 2013.
+
+Possibly useful to others as an introduction and tutorial.
 
 ## Building
 

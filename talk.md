@@ -72,62 +72,82 @@ It is based on NuttX, a RTOS (real time operating system) with POSIX interfaces.
   falling out of the sky.
 * You can write programs with familiar thread, file, pipe, network socket
   primitives.
-* Comes with filesystem (SD card), shell scripting language, interactive mode
+* Comes with filesystem (SD card), shell scripting language, interactive shell
 
-# TODO unfinished beyond this pt
+# Setup your PX4 repo
+
+You'll want to follow the [instructions on the PX4 wiki][1] to setup your
+development environment. 
+
+Just for your notes later, as of this writing (14 Jan 2013) you need some
+extra patches on top of the regular PX4 firmware.
+
+[1]: https://pixhawk.ethz.ch/px4/dev/px4_quickstart
+
+
+```
+$ git remote add tridge \
+    git://github.com/tridge/Firmware.git
+$ git fetch tridge
+$ git checkout -b ardupilot-support tridge/master
+
+```
 
 # Demonstrate a PX4 application
 
-The "Hello World" of PX4 will take an hour or two if you know your way
-around the command line
+Installing and coding up the [Hello World][2] of PX4 will take you two
+hours or so.
 
-If you're an eclipse user, there are online tutorials for that, too!
+Lets do a quick sample.
 
-* Hello world app:
-    * Show the source code
-    * Run the app from the command line
-
-* Go off and build a fizz-buzz app:
-    * ORB subscribe to altitude:
-       * if above 1m, "put me down I'm scared of heights"
-       * if below 0.2m "down on the ground where I belong"
+[2]:https://pixhawk.ethz.ch/px4/dev/hello_sky
 
 # But what about flight software?
 
-* The PX4 team has done some work on basic flight software to support
-  multirotors and airplanes
-* ETH has demonstrated adding computer vision systems for guidance
-* Here's where I get all salesy: ArduCopter and ArduPlane have solved all
-  lots of the hard problems to fly a copter & drone, with a great user
-  interface.
-* So, let's run ArduCopter!
+ETH and others have written flight control software for PX4 suitable for 
+researchers or developers.
+
+ArduCopter and ArduPlane have solved lots of the hard problems for flying
+with a great user interface.
+
+Luckily - ArduCopter and ArduPlane both run on the PX4.
+
+So, let's run ArduCopter!
 
 # Build ArduCopter against 
 
-Assume you've already grabbed the PX4 repo and done your hello world. (Follow the great online guide at px4 wiki!)
-* XXX Do we need to use tridge's fork?
+Assume you've already grabbed the PX4 repo and done your hello world.
 
-Grab the ardupilot repo. Its on Github!
+1. Grab the ardupilot repo. Its on Github!
 
 ```
 $ git clone git://github.com/diydrones/ardupilot.git
+```
+
+2. Configure: create config.mk automatically and add the path to your
+   PX4 directory.
+
+```
 $ cd ardupilot/ArduCopter && make configure
 ```
 
-Set your px4 repo location in ardupilot/config.mk
+3. Build ArduCopter for PX4:
 
 ```
 $ make px4 && make px4-upload
 ```
 
-Detailed instructions on the web. (XXX actually do this)
+4. Put the right [/etc/rc][3] file on SD card for boot.
+
+[3]:https://something
 
 # What's next?
 
-* Hack on ArduCopter with us
-  * Better control techniques enabled by PX4
-* Build more apps for PX4
-  * Lots of new sensors and outputs are possible, and its never been
-    easier to extend
-* Was this intimidating? We're working on a user friendly release
-  * Click and go from the mission planner, just like with your APM.
+Hack on ArduCopter with us: better control techniques enabled by extra RAM and
+processor power.
+
+Build more apps for PX4. Lots of new sensors and outputs are possible, and its
+never been easier to extend the software.
+
+Was this intimidating? We're working on a user friendly release. It'll be click
+and go from the mission planner, just like with your APM.
