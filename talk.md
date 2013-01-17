@@ -24,12 +24,11 @@
 
 # Why use PX4?
 
-* Processor is 10x better than an Arduino Mega in every way. ArduPilot Mega is
+* Processor is 10x better than an ArduPilot Mega in every way. ArduPilot Mega is
   bursting its platform at the seams: 100s of bytes of RAM free, scheduler
   difficult to manage, IO ports limited, etc.
-* Excellent hardware geared towards the advanced user
-  * Modular system encourages custom add-ons
-  * High pitch connectors - build your own wiring harness
+* Excellent hardware geared towards the advanced user. Modular system encourages
+  custom add-ons.
 * More user friendly improvments coming soon! (If soldering and command line
   scares you, wait a few months.)
 
@@ -76,47 +75,51 @@ It is based on NuttX, a RTOS (real time operating system) with POSIX interfaces.
 
 # Setup your PX4 repo
 
-You'll want to follow the [instructions on the PX4 wiki][1] to setup your
+You'll want to follow the _[instructions on the PX4 wiki][1]_ to setup your
 development environment. 
 
-Just for your notes later, as of this writing (14 Jan 2013) you need some
+Just for your notes later, as of this writing (17 Jan 2013) you need some
 extra patches on top of the regular PX4 firmware.
 
 [1]: https://pixhawk.ethz.ch/px4/dev/px4_quickstart
 
 
 ```
-$ git remote add tridge \
-    git://github.com/tridge/Firmware.git
-$ git fetch tridge
-$ git checkout -b ardupilot-support tridge/master
+$ git clone git://github.com/px4/Firmware.git px4-firmware
+$ cd px4-firmware
+$ git remote add pchickey \
+    git://github.com/pchickey/Firmware.git
+$ git fetch pchickey
+$ git checkout -b ardupilot-support \
+    pchickey/ardupilot-support-17jan
 
 ```
 
 # Demonstrate a PX4 application
 
-Installing and coding up the [Hello World][2] of PX4 will take you two
+Installing and coding up the _[Hello World][2]_ of PX4 will take you two
 hours or so.
 
 Lets do a quick sample.
 
 [2]:https://pixhawk.ethz.ch/px4/dev/hello_sky
 
-If you get stuck, there's a [stack overflow style Q&A] site.
+If you get stuck, there's a _[stack overflow style Q&A][3]_ site.
 
 [3]:http://answers.px4.ethz.ch/questions/
 
 # But what about flight software?
 
-ETH and others have written flight control software for PX4 suitable for 
+* ETH and others have written flight control software for PX4 suitable for 
 researchers or developers.
 
-ArduCopter and ArduPlane have solved lots of the hard problems for flying
+* ArduCopter and ArduPlane have solved lots of the hard problems for flying
 with a great user interface.
 
-Luckily - ArduCopter and ArduPlane both run on the PX4.
+* Recent work on *[hardware abstraction][4]* means ArduCopter and ArduPlane
+can run on the PX4.
 
-So, let's run ArduCopter!
+[4]:http://diydrones.com/profiles/blogs/lots-of-changes-to-apm-development
 
 # Build ArduCopter against 
 
@@ -141,7 +144,7 @@ $ cd ardupilot/ArduCopter && make configure
 $ make px4 && make px4-upload
 ```
 
-4. Put the right [/etc/rc][3] file on SD card for boot (next slide)
+4. Write an [/etc/rc][3] file on SD card for auto start (next slide)
 
 
 # ArduCopter /etc/rc
@@ -165,17 +168,23 @@ exit
 
 # What's next?
 
-Hack on ArduCopter with us: better control techniques enabled by extra RAM and
-processor power.
+* Hack on ArduPilot and PX4 with us! More processing power and powerful,
+  modular platform has lots of possibilities:
+    * Better control techniques: currently constrained by processing power
+    * Logging flight data and payload sensors to SD card
+    * Navigation & high level autonomy via scripting language
+    * New sensors including computer vision
 
-Build more apps for PX4. Lots of new sensors and outputs are possible, and its
-never been easier to extend the software.
-
-Was this intimidating? We're working on a user friendly release. It'll be click
-and go from the mission planner, just like with your APM.
+* Was this too nerdy? We're working on a user friendly release. It'll be
+  click and fly from the mission planner, just like with your APM.
 
 # Thank You
 
-`http://github.com/diydrones/ardupilot`
+ArduPilot:
+[`http://github.com/diydrones/ardupilot`](http://github.com/diydrones/ardupilot)
+
+Slides:
+[`http://github.com/pchickey/talk-px4-autopilot`](http://github.com/pchickey/talk-px4-autopilot)
 
 `pat@moreproductive.org`
+
