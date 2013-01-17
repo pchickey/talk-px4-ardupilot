@@ -102,6 +102,10 @@ Lets do a quick sample.
 
 [2]:https://pixhawk.ethz.ch/px4/dev/hello_sky
 
+If you get stuck, there's a [stack overflow style Q&A] site.
+
+[3]:http://answers.px4.ethz.ch/questions/
+
 # But what about flight software?
 
 ETH and others have written flight control software for PX4 suitable for 
@@ -137,9 +141,27 @@ $ cd ardupilot/ArduCopter && make configure
 $ make px4 && make px4-upload
 ```
 
-4. Put the right [/etc/rc][3] file on SD card for boot.
+4. Put the right [/etc/rc][3] file on SD card for boot (next slide)
 
-[3]:https://something
+
+# ArduCopter /etc/rc
+
+```
+# start the ORB service
+uorb start
+
+# start reqrd services for arducopter
+mpu6000 start
+ms5611 start
+hmc5883 start
+fmu start mode_pwm
+
+# finally, start arducopter
+ArduCopter start
+
+# relinqish control of tty port
+exit
+```
 
 # What's next?
 
@@ -151,3 +173,9 @@ never been easier to extend the software.
 
 Was this intimidating? We're working on a user friendly release. It'll be click
 and go from the mission planner, just like with your APM.
+
+# Thank You
+
+`http://github.com/diydrones/ardupilot`
+
+`pat@moreproductive.org`
